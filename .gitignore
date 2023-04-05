@@ -1,0 +1,6 @@
+nohup.out
+*.pyc
+*.pyo
+nohup.out
+.vscode/*
+db.sqlite3
