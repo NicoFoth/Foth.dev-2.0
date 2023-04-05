@@ -1,0 +1,28 @@
+{% extends 'base_new.html' %}
+{% block content %}
+
+<table class="table table-bordered" style="background-color: rgb(79, 81, 87); color: black;">
+    <thead style="background-color: rgb(155, 153, 153);">
+        <tr>
+            <th scope="col">Team A</th>
+            <th scope="col">Team B</th>
+        </tr>
+    </thead>
+    <tbody style="font-size: 19px; color: rgb(221, 214, 214)">
+        <tr>
+            <td>
+                {% for player in team_a %}
+                {{ player}}
+                {% endfor %}
+            </td>
+            <td>
+                {% for player in team_b %}
+                {{ player }}
+                {% endfor %}
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+{% endblock content %}

@@ -1,0 +1,73 @@
+{% load static %}
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Foth.dev</title>
+
+  <link rel="shortcut icon" href="{% static 'logo.png' %}" />
+
+</head>
+
+<body style="background-color: rgb(43, 46, 48); color: white;">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(65, 70, 73); border-bottom: 1px solid white;">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'show_landing_page' %}"><img src="{% static 'logo.png' %}" width="75px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="px-md-3 navbar-link text-light" href="#">Über mich</a>
+          </li>
+          <li>
+            <a class="px-md-3 navbar-link text-light" href="{% url 'show_blog_posts' %}">Blog</a>
+          </li>
+          <li>
+            <a class="px-md-3 navbar-link text-light" href="{% url 'show_csgo_stats' %}">CS:GO</a>
+          </li>
+        </ul>
+        {% if user.is_authenticated %}
+        <div class="px-md-4"><a class="navbar-link text-light" href="{% url 'show_suggestions' %}">Verbesserungsvorschläge</a></div>
+        <div class="dropdown">
+          <a class="btn " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white">
+            {{ user.username }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'userProfile' %}">Profil</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Ausloggen</a>
+          </div>
+        </div>
+        {% else %}
+        <div class="px-md-4"><a class="navbar-link text-light" href="{% url 'login' %}">Login</a></div>
+        <div class="px-md-4"><a class="navbar-link text-light" href="{% url 'register' %}">Registrieren</a></div>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}" style="margin: 0 auto; margin-top: 10px; width: 60%;">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+  <div class="container" style ="margin-top:25px" align="center">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <div style="bottom: 0; position: fixed">
+    <a href="{% url 'show_legal_page' %}" style="color: grey;">Impressum & Datenschutzerklärung</a>
+  </div>
+
+</body>
+</html>

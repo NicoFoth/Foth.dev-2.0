@@ -1,0 +1,281 @@
+{% extends 'base_new.html' %}
+{% load static %}
+
+
+{% block content %}
+
+  <div>
+    <div class="container" style="margin-bottom: 50px;">
+      <h1 class="heading" style="padding-bottom: 15px;">Poker Rankings</h1>
+
+
+    <div class="row">
+    <div class="col col-8">
+      <h3>Rangtabelle</h3>
+      <div class="dyn-list">
+        <div role="list" class="dyn-items">
+          <div role="listitem" class="dyn-item">
+            <div class="csgo-columns-1 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">#</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Name</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">Balance</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">Rang</div>
+              </div>
+            </div>
+          </div>
+
+          {% for player_object in player_data %}
+
+          
+          {% if forloop.counter == 1 %}
+          <div role="listitem" class="dyn-item" style="color: rgb(255, 217, 0)">
+          {% endif %}
+          {% if forloop.counter == 2 %}
+          <div role="listitem" class="dyn-item" style="color: rgb(192, 192, 192)">
+          {% endif %}
+          {% if forloop.counter == 3 %}
+          <div role="listitem" class="dyn-item" style="color: #bf8970">
+          {% endif %}
+          {% if forloop.counter > 3 %}
+          <div role="listitem" class="dyn-item">
+          {% endif %}
+
+            <div class="csgo-columns-2 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">{{ forloop.counter }}</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">{{ player_object.name }}</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">{{ player_object.balance }}</div>
+              </div>
+              <div class="col col-3">
+
+                <div class="csgo-text-block-3">N/A</div>
+
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+
+        </div>
+      </div>
+      </div>
+
+      <div class="col col-4">
+        <h3>Control Center</h3>
+      <div class="dyn-list">
+        <div role="list" class="dyn-items">
+          <div role="listitem" class="dyn-item">
+            
+            {% if user.is_authenticated %}
+            
+            <form method="POST" style="color:black">
+              {% csrf_token %}
+              {{ update_form }}
+              <br>
+              <input type="submit" value="Auszahlen" class="button button" name="withdraw" style="margin-top: 15px">
+              <input type="submit" value="Einzahlen" class="button button" name="deposit">
+
+            </form>
+
+
+            {% else %}
+            <div style="font-size: 18px; margin-top:30%">Um Zugriff auf die Funktionen des Poker-Rankings zu haben, müssen Sie als Administrator eingeloggt sein.</div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <div class="row">
+    <div class="row">
+    <div class="col col-8">
+      <h3>Vorherige Seasons</h3>
+      <h4>Season 1</h4>
+      <div class="dyn-list">
+        <div role="list" class="dyn-items">
+          <div role="listitem" class="dyn-item">
+            <div class="csgo-columns-1 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">#</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Name</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">Balance</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">Rang</div>
+              </div>
+            </div>
+          </div>
+          
+          <div role="listitem" class="dyn-item" style="color: rgb(255, 217, 0)">
+
+            <div class="csgo-columns-2 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">1</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Alexander</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">14560</div>
+              </div>
+              <div class="col col-3">
+
+                <div class="csgo-text-block-3">N/A</div>
+
+              </div>
+            </div>
+          </div>
+          
+          <div role="listitem" class="dyn-item" style="color: rgb(192, 192, 192)">
+
+
+            <div class="csgo-columns-2 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">2</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Daniel</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">1950</div>
+              </div>
+              <div class="col col-3">
+
+                <div class="csgo-text-block-3">N/A</div>
+
+              </div>
+            </div>
+          </div>
+          
+          <div role="listitem" class="dyn-item" style="color: #bf8970">
+
+            <div class="csgo-columns-2 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">3</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Nico</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">1400</div>
+              </div>
+              <div class="col col-3">
+
+                <div class="csgo-text-block-3">N/A</div>
+
+              </div>
+            </div>
+          </div>
+
+          <div role="listitem" class="dyn-item">
+          
+
+            <div class="csgo-columns-2 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">4</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Jannis</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">-1155</div>
+              </div>
+              <div class="col col-3">
+
+                <div class="csgo-text-block-3">N/A</div>
+
+              </div>
+            </div>
+          </div>
+          
+          <div role="listitem" class="dyn-item">
+          
+
+            <div class="csgo-columns-2 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">5</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Miguel</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">-4500</div>
+              </div>
+              <div class="col col-3">
+
+                <div class="csgo-text-block-3">N/A</div>
+
+              </div>
+            </div>
+          </div>
+
+          <div role="listitem" class="dyn-item">
+          
+
+            <div class="csgo-columns-2 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">6</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Jannek</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">-5535</div>
+              </div>
+              <div class="col col-3">
+
+                <div class="csgo-text-block-3">N/A</div>
+
+              </div>
+            </div>
+          </div>
+
+          <div role="listitem" class="dyn-item">
+          
+
+            <div class="csgo-columns-2 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">7</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Iason</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">-6720</div>
+              </div>
+              <div class="col col-3">
+
+                <div class="csgo-text-block-3">N/A</div>
+
+              </div>
+            </div>
+          </div>
+
+          
+
+        </div>
+      </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+{% endblock %}

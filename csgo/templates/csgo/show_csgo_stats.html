@@ -1,0 +1,133 @@
+{% extends 'base_new.html' %}
+{% load static %}
+
+
+{% block content %}
+
+  <div>
+    <div class="container" style="margin-bottom: 50px;">
+      <h1 class="heading" style="padding-bottom: 15px;">CS:GO Rankings</h1>
+
+
+    <div class="row">
+    <div class="col col-8">
+      <h3>Rangtabelle</h3>
+      <div class="dyn-list">
+        <div role="list" class="dyn-items">
+          <div role="listitem" class="dyn-item">
+            <div class="csgo-columns-1 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">#</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">Name</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">Elo</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">Rang</div>
+              </div>
+            </div>
+          </div>
+
+          {% for player_object in player_data_ranked %}
+
+          
+          {% if forloop.counter == 1 %}
+          <div role="listitem" class="dyn-item" style="color: rgb(255, 217, 0)">
+          {% endif %}
+          {% if forloop.counter == 2 %}
+          <div role="listitem" class="dyn-item" style="color: rgb(192, 192, 192)">
+          {% endif %}
+          {% if forloop.counter == 3 %}
+          <div role="listitem" class="dyn-item" style="color: #bf8970">
+          {% endif %}
+          {% if forloop.counter > 3 %}
+          <div role="listitem" class="dyn-item">
+          {% endif %}
+
+            <div class="csgo-columns-2 row">
+              <div class="col col-1">
+                <div class="csgo-text-block">{{ forloop.counter }}</div>
+              </div>
+              <div class="col col-5">
+                <div class="csgo-text-block-2">{{ player_object.name }}</div>
+              </div>
+              <div class="col col-3">
+                <div class="csgo-text-block-3">{{ player_object.elo }}</div>
+              </div>
+              <div class="col col-3">
+
+                {% if forloop.first %}
+                <img src="{% static 'csgo/niko.png' %}" class="csgo-rank-img">
+                {% elif forloop.last %}
+                <img src="{% static 'csgo/schublade.png' %}" class="csgo-rank-img">
+                {% elif player_object.elo > 1625 %}
+                <img src="{% static 'csgo/omega.png' %}" class="csgo-rank-img">
+                {% elif player_object.elo > 1575 %}
+                <img src="{% static 'csgo/alpha.png' %}" class="csgo-rank-img">
+                {% elif player_object.elo > 1525 %}
+                <img src="{% static 'csgo/beta.png' %}" class="csgo-rank-img">
+                {% elif player_object.elo > 1450 %}
+                <img src="{% static 'csgo/gamma.png' %}" class="csgo-rank-img">
+                {% elif player_object.elo > 1350 %}
+                <img src="{% static 'csgo/beep_boop.png' %}" class="csgo-rank-img">
+                {% elif player_object.elo > 1200 %}
+                <img src="{% static 'csgo/bots.png' %}" class="csgo-rank-img">
+                {% endif %}
+
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+
+        </div>
+      </div>
+      </div>
+
+      <div class="col col-4">
+        <h3>Platzierungstabelle</h3>
+      <div class="dyn-list">
+        <div role="list" class="dyn-items">
+          <div role="listitem" class="dyn-item">
+            <div class="csgo-columns-1 row">
+              <div class="col col-6">
+                <div class="csgo-text-block-2">Name</div>
+              </div>
+              <div class="col col-2">
+                <div class="csgo-text-block-3">Platzierungsspiele</div>
+              </div>
+            </div>
+          </div>
+
+
+
+          {% for player_object, placement_matches in player_data_unranked %}
+
+          <div role="listitem" class="dyn-item">
+            <div class="csgo-columns-2 row">
+              <div class="col col-8">
+                <div class="csgo-text-block-2">{{ player_object.name }}</div>
+              </div>
+              <div class="col col-2">
+                <div class="csgo-text-block-3">{{ placement_matches }}</div>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+
+        </div>
+      </div>
+
+      <a href="{% url 'select_players' %}" class="button button" style="margin-top: 20%; margin-left:20%">Teams generieren</a>
+
+    </div>
+    </div>
+
+    </div>
+  </div>
+
+{% endblock %}
