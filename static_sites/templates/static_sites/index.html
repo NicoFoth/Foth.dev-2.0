@@ -1,42 +1,12 @@
-{% extends 'base_new.html' %}
-{% load static %}
+{% extends "base2.0.html" %}
 {% block content %}
-<style>
-    .body {
-        background: url("{% static 'backgrounds/landing.webp' %}");
-        background-size: cover;
-    }
-    .container {
-        background-color: rgba(0, 0, 0, 0);
-        
-    }
-    .holder {
-        backdrop-filter: blur(5px);
-        max-width: 75ch;
-        border-radius: 5%;
-        background-color: rgba(255, 255, 255, .15);  
-        margin-top: 5rem;
-    }
-</style>
-    <div class="container">
-        <div class="holder">
-            <div class="row">
-                <h1>Foth.dev</h1>
-                <h2>Projekte</h2>
-                <p class="paragraph startpage-intro">
-                    Seit nun mehr als 6 Jahren beschäftige ich mich in meiner Freizeit mit dem Thema Programmierung, welchen ich Erfahrungen mit
-                    diversen Sprachen und Technologien gemacht habe. Spezialisiert habe ich auf die Entwicklung von Algorithmen und Websites,
-                    insbesondere das Backend dieser.
-                </p>
-                <a href="{% url 'show_projects_page' %}" class="button startpage-button">Mehr zur Programmierung</a>
-            </div>
-            <div class="row">
-                <h2>Webentwicklung</h2>
-                <p class="paragraph startpage-intro">
-                    Brauchen Sie eine Website um Ihre Präsenz ins Internet zu erweitern oder braucht Ihre Website ein neues Design? Kontaktieren Sie mich direkt.
-                </p>
-                <a href="{% url 'show_contact_page' %}" class="button startpage-button">Kontakt</a>
-            </div>
-        </div>
+<div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
+    <div class="shrink-0">
+      <img class="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo">
     </div>
+    <div>
+      <div class="text-xl font-medium text-black">ChitChat</div>
+      <p class="text-slate-500">You have a new message!</p>
+    </div>
+  </div>
 {% endblock content %}
