@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include("static_sites.urls"), name="static-sites"),
     path('csgo/', include("csgo.urls"), name="csgo"),
     path('poker/', include("poker.urls"), name="poker"),
+    path('__reload__/', include('django_browser_reload.urls')),
 ]
