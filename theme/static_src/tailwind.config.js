@@ -5,6 +5,8 @@
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
 
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
     content: [
         /**
@@ -45,7 +47,14 @@ module.exports = {
         container: {
             "aoc": "#0F0F23",
         },
-        extend: {},
+        extend: {
+            textShadow: {
+                sm: '0 1px 2px var(--tw-shadow-color)',
+                DEFAULT: '0 2px 4px var(--tw-shadow-color)',
+                lg: '0 8px 16px var(--tw-shadow-color)',
+                aoc: '0px 0 3px var(--tw-shadow-color)',
+            },
+        },
     },
     plugins: [
         /**
@@ -57,5 +66,16 @@ module.exports = {
         require('@tailwindcss/typography'),
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
+
+        plugin(function ({ matchUtilities, theme }) {
+            matchUtilities(
+              {
+                'text-shadow': (value) => ({
+                  textShadow: value,
+                }),
+              },
+              { values: theme('textShadow') }
+            )
+          }),
     ],
 }
