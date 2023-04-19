@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["foth.dev", "www.foth.dev", "localhost", "127.0.0.1", "162.55.221.197"]
 
+INTERNAL_IPS = ["127.0.0.1", "localhost"]
+
 
 # Application definition
 
@@ -39,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'csgo.apps.CsgoConfig',
     'static_sites.apps.StaticSitesConfig',
-    'poker.apps.PokerConfig'
+    'poker.apps.PokerConfig',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
 ]
 
 
@@ -51,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware'
 ]
 
 ROOT_URLCONF = 'webservice.urls'
@@ -130,6 +136,7 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = "/static/"
 
+TAILWIND_APP_NAME = 'theme'
 
 LOGIN_REDIRECT_URL = "show_landing_page"
 
