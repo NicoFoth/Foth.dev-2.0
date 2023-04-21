@@ -11,10 +11,15 @@
     <title>Foth.dev</title>
 </head>
 <body class="bg-[#0F0F23]">
-    <h1 class="text-lime-500 text-shadow-aoc shadow-lime-500 font-mono text-3xl">
-        Foth.dev
-    </h1>
-    {% block content %}
-    {% endblock content %}
+    <div name="page-content" class="w-1/2 mx-5 my-2">
+        <div name="navigation" class="items-end flex flex-row">
+            <h1 class="basis-1/4 text-lime-500 text-shadow-aoc shadow-lime-500 font-mono">Foth.dev</h1>
+            <h3 class="basis-1/6 text-green-600 font-mono hover:text-green-500 hover:text-shadow-aoc hover:shadow-green-500">{About me}</h3>
+            <h3 class="basis-1/6 text-green-600 font-mono hover:text-green-500 hover:text-shadow-aoc hover:shadow-green-500">{Projects}</h3>
+            <h3 class="basis-1/6 text-green-600 font-mono hover:text-green-500 hover:text-shadow-aoc hover:shadow-green-500">{Contact}</h3>
+        </div>
+        {% block content %}
+        {% endblock content %}
+    </div>
 </body>
 </html>
