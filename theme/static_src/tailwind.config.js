@@ -44,9 +44,6 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        container: {
-            "aoc": "#0F0F23",
-        },
         extend: {
             textShadow: {
                 sm: '0 1px 2px var(--tw-shadow-color)',
