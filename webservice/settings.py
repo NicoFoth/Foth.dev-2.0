@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'csgo.apps.CsgoConfig',
     'static_sites.apps.StaticSitesConfig',
     'poker.apps.PokerConfig',
+    'projects.apps.ProjectsConfig',
     'tailwind',
     'theme',
     'django_browser_reload',
