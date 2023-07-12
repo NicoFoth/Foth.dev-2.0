@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="text-green-500">
-  <form action="">
-    <label for="name">Name: </label>
-    <input type="text" id="name">
-    <label for="email">E-Mail: </label>
-    <input type="text" id="email">
+<div class="text-green-700">
+  <form action="" class="flex flex-col">
+    <div class="flex mb-2">
+      <div class="w-full mr-2">
+        <label for="name">Name: </label>
+        <input type="text" id="name" class="w-full bg-gray-800 text-yellow-500 border-0">
+      </div>
+      <div class="w-full ml-2">
+        <label for="email">E-Mail: </label>
+        <input type="text" id="email" class="w-full bg-gray-800 text-yellow-500 border-0">
+      </div>
+    </div>
     <label for="subject">Subject: </label>
-    <input type="text" id="subject">
+    <input type="text" id="subject" class="w-full mb-2 bg-gray-800 text-yellow-500 border-0">
     <label for="message">Message: </label>
-    <input type="text" id="message">
-    <button type="submit">Send</button>
+    <textarea id="message" class="w-full mb-2 bg-gray-800 text-yellow-500 border-0"></textarea>
+    <button type="submit" class="text-green-500 text-shadow-aoc shadow-green-500 py-2 px-4 rounded border-2 border-green-700 hover:border-red-500 hover:text-red-500 hover:shadow-red-500">Send</button>
   </form>
 </div>
 {% endblock %}
