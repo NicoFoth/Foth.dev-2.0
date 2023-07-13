@@ -3,25 +3,22 @@
 
 
 {% block content %}
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-96 mx-auto">
+<div class="gap-4 h-96 mx-auto">
   {% for project in projects %}
-    <div class="h-full p-4 flex flex-col border-2 border-green-700">
-      <div class="shadow-lg overflow-hidden flex-1 flex flex-col">
-        <div class="px-6 py-2 flex-grow">
+    <div class="relative h-full w-1/2 p-4 my-5 border-2 border-green-700">
+      <div class="overflow-hidden">
+        <div class="px-6 py-2">
           <div class="font-bold text-2xl mb-2 text-yellow-400 text-shadow-aoc shadow-yellow-500">{{ project.title }}</div>
-          <p class="text-gray-400 text-base overflow-y-auto max-h-64">
+          <p class="text-gray-400 overflow-y-auto max-h-64">
             {{ project.short_description }}
           </p>
         </div>
-        <div class="px-6 py-2">
-          <a href="{{ project.github_link }}" class="inline-block text-green-600 text-sm  hover:text-shadow-aoc hover:shadow-green-500 hover:text-green-500 mr-2 align-self-end">{Github}</a>
-          <a href="{{ project.read_more_link }}" class="inline-block text-green-600 text-sm  hover:text-shadow-aoc hover:shadow-green-500 hover:text-green-500 mr-2 align-self-end">{Read More}</a>
+        <div class="absolute bottom-0 px-6 py-2">
+          <a href="{{ project.github_link }}" class="text-green-600 text-sm hover:text-shadow-aoc hover:shadow-green-500 hover:text-green-500">{Github}</a>
+          <a href="{{ project.read_more_link }}" class="text-green-600 text-sm hover:text-shadow-aoc hover:shadow-green-500 hover:text-green-500">{Read More}</a>
         </div>
       </div>
     </div>
-    {% if forloop.counter|divisibleby:3 %}
-      </div><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5 h-96 mx-auto">
-    {% endif %}
   {% endfor %}
 </div>
 {% endblock %}
