@@ -1,41 +1,23 @@
 from django.shortcuts import render, redirect
-from .models import PokerPlayer
+from .models import *
 from .forms import UpdatePokerPlayer
 from django.contrib import messages
 
 
 def show_poker_page(request):
-
-    if request.method == "POST":
-        update_form = UpdatePokerPlayer(request.POST)
-        
-        if update_form.is_valid():
-            if "deposit" in request.POST:
-
-                name = update_form.cleaned_data["player"]
-                amount = int(update_form.cleaned_data["amount"])
-
-                queryset = PokerPlayer.objects.filter(name=name)
-                current_balance = queryset[0].balance
-                PokerPlayer.objects.filter(name=name).update(balance=current_balance+amount)
-
-                return redirect("show_poker_page")
+    seasons_data = PokerSeason.objects.all().select_related()
+    seasons = {}
+    
+    for season in seasons_data:
+        seasons[season] = []
+        players = PokerPlayer.objects.filter(pokerplayergameperformance__game__season=season).distinct()
+        for player in players:
+            balance = 0
+            for game in player.pokerplayergameperformance_set.all():
+                balance += game.chips
+            seasons[season].append((player, balance))
+        seasons[season].sort(key=lambda x: x[1], reverse=True)
+        print(seasons)
 
 
-            elif "withdraw" in request.POST:
-
-                name = update_form.cleaned_data["player"]
-                amount = int(update_form.cleaned_data["amount"])
-
-                queryset = PokerPlayer.objects.filter(name=name)
-                current_balance = queryset[0].balance
-                PokerPlayer.objects.filter(name=name).update(balance=current_balance-amount)
-
-                return redirect("show_poker_page")
-
-    else:
-
-        update_form = UpdatePokerPlayer()
-        player_data = PokerPlayer.objects.order_by("-balance")
-
-        return render(request, "poker/show_poker_page.html", {"player_data": player_data, "update_form": update_form})
+    return render(request, "poker/show_poker_page.html", {"seasons_data": seasons})
