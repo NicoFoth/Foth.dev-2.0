@@ -1,17 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import CsgoPlayer
+from .models import *
 from .forms import SelectPlayers
 from .generate_team import generate
 from django.contrib import messages
 
 def show_csgo_stats(request):
     
-    player_data = CsgoPlayer.objects.order_by("-elo")
+    #player_data = CsgoPlayer.objects.order_by("-elo")
 
     player_list_ranked = []
     player_list_unranked = []
 
-    for player in player_data:
+
+    """for player in player_data:
         if player.played_matches >= 10:
             player_list_ranked.append(player)
         else:
@@ -19,7 +20,7 @@ def show_csgo_stats(request):
 
     unranked_matches_for_rank = [10-int(player.played_matches) for player in player_list_unranked]
 
-    player_data_unranked = zip(player_list_unranked, unranked_matches_for_rank)
+    player_data_unranked = zip(player_list_unranked, unranked_matches_for_rank)"""
 
     return render(request, "csgo/show_csgo_stats.html", {"player_data_ranked": player_list_ranked, "player_data_unranked": player_data_unranked, "unranked_matches": unranked_matches_for_rank})
 
