@@ -9,7 +9,7 @@ def show_csgo_stats(request):
     seasons_query = CSSeason.objects.all()
 
     for season in seasons_query:
-        seasonplayerelos = CSPlayerSeasonElo.objects.filter(season=season).select_related()
+        seasonplayerelos = CSPlayerSeasonElo.objects.filter(season=season).select_related().order_by("-elo")
         seasons[season] = []
         for seasonplayerelo in seasonplayerelos:
             seasons[season].append((seasonplayerelo.player.name, seasonplayerelo.elo))
