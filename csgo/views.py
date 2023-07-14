@@ -10,6 +10,8 @@ def show_csgo_stats(request):
 
     player_list_ranked = []
     player_list_unranked = []
+    player_data_unranked = []
+    unranked_matches_for_rank = []
 
 
     """for player in player_data:
@@ -62,6 +64,5 @@ def select_players(request):
 
 def player_profile(request, steam_id):
 
-    player_details = CsgoPlayer.objects.get(steam_id=steam_id)
 
-    return render(request, 'csgo/player_profile.html', {"player": player_details})
+    return render(request, 'csgo/player_profile.html', {"player": ()})
