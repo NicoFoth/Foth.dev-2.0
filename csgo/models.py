@@ -27,7 +27,6 @@ class CSMode(models.Model):
 class CSPlayer(models.Model):
     steam_id = models.CharField(max_length=18)
     name = models.CharField(max_length=32)
-    elo = models.IntegerField(default=1500)
 
     def __str__(self):
         return f"{self.name}"
@@ -69,3 +68,12 @@ class CSPlayerMatch(models.Model):
 
     def __str__(self):
         return f"{self.player} - {self.match}"
+    
+
+class CSPlayerSeasonElo(models.Model):
+    player = models.ForeignKey(CSPlayer, on_delete=models.CASCADE)
+    season = models.ForeignKey(CSSeason, on_delete=models.CASCADE)
+    elo = models.IntegerField(default=1500)
+
+    def __str__(self):
+        return f"{self.player} - {self.elo}"

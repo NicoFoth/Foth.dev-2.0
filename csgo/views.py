@@ -5,26 +5,19 @@ from .generate_team import generate
 from django.contrib import messages
 
 def show_csgo_stats(request):
-    
-    #player_data = CsgoPlayer.objects.order_by("-elo")
+    seasons = {}
+    seasons_query = CSSeason.objects.all()
 
-    player_list_ranked = []
-    player_list_unranked = []
-    player_data_unranked = []
-    unranked_matches_for_rank = []
+    for season in seasons_query:
+        seasonplayerelos = CSPlayerSeasonElo.objects.filter(season=season).select_related()
+        seasons[season] = []
+        for seasonplayerelo in seasonplayerelos:
+            seasons[season].append((seasonplayerelo.player.name, seasonplayerelo.elo))
 
+        
+            
 
-    """for player in player_data:
-        if player.played_matches >= 10:
-            player_list_ranked.append(player)
-        else:
-            player_list_unranked.append(player)
-
-    unranked_matches_for_rank = [10-int(player.played_matches) for player in player_list_unranked]
-
-    player_data_unranked = zip(player_list_unranked, unranked_matches_for_rank)"""
-
-    return render(request, "csgo/show_csgo_stats.html", {"player_data_ranked": player_list_ranked, "player_data_unranked": player_data_unranked, "unranked_matches": unranked_matches_for_rank})
+    return render(request, "csgo/show_csgo_stats.html", {"seasons": seasons})
 
 def select_players(request):
 
