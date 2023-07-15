@@ -3,11 +3,11 @@
 
 
 {% block content %}
-<h1 class="text-3xl text-green-500">CS Rankings</h1>
-{% for season, players in seasons.items %}
+<h1 class="text-3xl text-green-500">{{ season.name }}</h1>
+<p class="text-green-700">{{ season.startDate }} - {{ season.endDate }}</p>
 <div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
-  <h2 class="text-2xl text-green-700 text-center">{{ season }}</h2>
-  <p class="text-center">{{ season.startDate }} - {{ season.endDate }}</p>
+  <h2 class="text-2xl text-green-700 text-center">Current ranking</h2>
+  <p class="text-center">Only already ranked players</p>
   <table class="text-center mx-auto">
     <thead>
       <tr>
@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for player in players %}
+      {% for player in seasonplayerdata %}
       {% if forloop.counter == 1 %}
       <tr class="text-yellow-300 text-shadow-aoc shadow-yellow-300">
       {% elif forloop.counter == 2 %}
@@ -29,8 +29,8 @@
       <tr>
       {% endif %}
         <td class="px-2">{{ forloop.counter }}</td>
-        <td class="px-2">{{ player.0 }}</td>
-        <td class="px-2">{{ player.1 }}</td>
+        <td class="px-2">{{ player.player.name }}</td>
+        <td class="px-2">{{ player.elo }}</td>
         {% if forloop.first %}
         <td class="px-2">
           <img src="{% static 'csgo/niko.png' %}" class="w-24">
@@ -51,10 +51,26 @@
         <td class="px-2"><img src="{% static 'csgo/bots.png' %}" class="w-24"></td>
         {% endif %}
       </tr>
-
       {% endfor %}
     </tbody>
   </table>
 </div>
-{% endfor %}
+
+<div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
+    <h2 class="text-2xl text-green-700 text-center">Unranked players</h2>
+    <table class="text-center mx-auto">
+      <thead>
+        <tr>
+          <th class="px-2">{Name}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for player in unrankedplayers %}
+        <tr>
+          <td class="px-2">{{ player.player.name }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}
