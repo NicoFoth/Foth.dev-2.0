@@ -21,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-    {% for player in matchplayers %}
+    {% for player in match_players %}
     {% if player.win == 1 %}
       <tr class="text-green-500">
         <td class="px-2">{{ player.player.name }}</td>
@@ -43,7 +43,7 @@
         <td>---</td>
         <td>---</td>
     </tr>
-    {% for player in matchplayers %}
+    {% for player in match_players %}
     {% if player.win == 0 %}
     <tr>
         <td class="px-2">{{ player.player.name }}</td>

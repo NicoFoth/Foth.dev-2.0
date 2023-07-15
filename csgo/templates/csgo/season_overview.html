@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for player in seasonplayerdata %}
+      {% for player in season_player_elos %}
       {% if forloop.counter == 1 %}
       <tr class="text-yellow-300 text-shadow-aoc shadow-yellow-300">
       {% elif forloop.counter == 2 %}
@@ -65,7 +65,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for player in unrankedplayers %}
+        {% for player in unranked_players %}
         <tr>
           <td class="px-2">{{ player.player.name }}</td>
         </tr>
@@ -80,7 +80,7 @@
     <tbody>
       {% for match in matches %}
       <tr>
-        <td class="px-2"><a href="{% url 'match_overview' match_id=match.id %}">{{ match.date }} {{ match.map }}</a></td>
+        <td class="px-2"><a href="{% url 'cs_match_overview' match_id=match.id %}">{{ match.date }} {{ match.map }}</a></td>
       </tr>
       {% endfor %}
     </tbody>
