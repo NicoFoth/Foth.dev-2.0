@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<h1 class="text-3xl text-green-500">{{ match.map }}</h1>
+<p class="text-green-700">{{ map.date }}</p>
+<div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
+  <h2 class="text-2xl text-green-700 text-center">Scoreboard</h2>
+  <p class="text-center">Endscore: {{ match.endstate }}</p>
+  <table class="text-center mx-auto">
+    <thead>
+      <tr>
+        <th class="px-2">{Name}</th>
+        <th class="px-2">{Kills}</th>
+        <th class="px-2">{Assists}</th>
+        <th class="px-2">{Deaths}</th>
+        <th class="px-2">{EF}</th>
+        <th class="px-2">{UD}</th>
+        <th class="px-2">{HS}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for player in matchplayers %}
+    {% if player.win == 1 %}
+      <tr class="text-green-500">
+        <td class="px-2">{{ player.player.name }}</td>
+        <td class="px-2">{{ player.kills }}</td>
+        <td class="px-2">{{ player.assists }}</td>
+        <td class="px-2">{{ player.deaths }}</td>
+        <td class="px-2">{{ player.enemiesFlashed }}</td>
+        <td class="px-2">{{ player.utilityDamage }}</td>
+        <td class="px-2">{{ player.headshotKills }}</td>
+      </tr>
+    {% endif %}
+    {% endfor %}
+    <tr>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+    </tr>
+    {% for player in matchplayers %}
+    {% if player.win == 0 %}
+    <tr>
+        <td class="px-2">{{ player.player.name }}</td>
+        <td class="px-2">{{ player.kills }}</td>
+        <td class="px-2">{{ player.assists }}</td>
+        <td class="px-2">{{ player.deaths }}</td>
+        <td class="px-2">{{ player.enemiesFlashed }}</td>
+        <td class="px-2">{{ player.utilityDamage }}</td>
+        <td class="px-2">{{ player.headshotKills }}</td>
+      </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

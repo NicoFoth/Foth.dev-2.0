@@ -72,5 +72,18 @@
         {% endfor %}
       </tbody>
     </table>
-  </div>
+</div>
+
+<div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
+  <h2 class="text-2xl text-green-700 text-center">Matches</h2>
+  <table class="text-center mx-auto">
+    <tbody>
+      {% for match in matches %}
+      <tr>
+        <td class="px-2"><a href="{% url 'match_overview' match_id=match.id %}">{{ match.date }} {{ match.map }}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

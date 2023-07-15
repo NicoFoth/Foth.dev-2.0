@@ -23,7 +23,18 @@ def season_overview(request, season_id):
     ranked_players = CSPlayerMatch.objects.filter(match__season=season_id).values('player').annotate(game_count=Count('player')).filter(game_count__gte=10).values_list('player', flat=True)
     seasonplayerelos = CSPlayerSeasonElo.objects.filter(season=season_object, player__in=ranked_players).select_related().order_by("-elo")
     unrankedplayers = CSPlayerMatch.objects.filter(match__season=season_id).exclude(player__in=ranked_players)
-    return render(request, "csgo/season_overview.html", {"season": season_object, "seasonplayerdata": seasonplayerelos, "unrankedplayers": unrankedplayers})
+
+    matches = CSMatch.objects.filter(season=season_id).order_by("-date")
+
+    return render(request, "csgo/season_overview.html", {"season": season_object, "seasonplayerdata": seasonplayerelos, "unrankedplayers": unrankedplayers, "matches": matches})
+
+
+def match_overview(request, match_id):
+    match_object = CSMatch.objects.get(pk=match_id)
+    matchplayers = CSPlayerMatch.objects.filter(match=match_object).select_related().order_by("kills")
+
+    return render(request, "csgo/match_overview.html", {"match": match_object, "matchplayers": matchplayers})
+
 
 def select_players(request):
 
