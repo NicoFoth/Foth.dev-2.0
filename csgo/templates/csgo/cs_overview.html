@@ -6,7 +6,7 @@
 <h1 class="text-3xl text-green-500">CS Rankings</h1>
 {% for season, players in seasons.items %}
 <div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
-  <h2 class="text-2xl text-green-700 text-center"><a href="{% url 'season_overview' season_id=season.id %}">{{ season }}</a></h2>
+  <h2 class="text-2xl text-green-700 text-center"><a href="{% url 'cs_season_overview' season_id=season.id %}">{{ season }}</a></h2>
   <p class="text-center">{{ season.startDate }} - {{ season.endDate }}</p>
   <table class="text-center mx-auto">
     <thead>
@@ -29,7 +29,7 @@
       <tr>
       {% endif %}
         <td class="px-2">{{ forloop.counter }}</td>
-        <td class="px-2">{{ player.0 }}</td>
+        <td class="px-2"><a href="{% url 'cs_player_profile' player_id=player.0.id %}">{{ player.0.name }}</a></td>
         <td class="px-2">{{ player.1 }}</td>
         {% if forloop.first %}
         <td class="px-2">

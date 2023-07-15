@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<h1 class="text-3xl text-green-500">{{ player.name }}</h1>
+<p class="text-green-700">{{ map.date }}</p>
+<div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
+  <h2 class="text-2xl text-green-700 text-center">Scoreboard</h2>
+  <p class="text-center">Endscore: {{ match.endstate }}</p>
+  
+</div>
+<div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
+    <h2 class="text-2xl text-green-700 text-center">Matches</h2>
+    <table class="text-center mx-auto">
+      <tbody>
+        {% for match in player_matches %}
+        <tr>
+          <td class="px-2"><a href="{% url 'cs_match_overview' match_id=match.match.id %}">{{ match.match.date }} {{ match.match.map }}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
