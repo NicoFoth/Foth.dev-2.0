@@ -4,10 +4,53 @@
 
 {% block content %}
 <h1 class="text-3xl text-green-500">{{ player.name }}</h1>
-<p class="text-green-700">{{ map.date }}</p>
 <div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
   <h2 class="text-2xl text-green-700 text-center">Stats</h2>
-  <p class="text-center">Endscore: {{ match.endstate }}</p>
+  <p class="text-center">Overall stats</p>
+  <table class="my-5">
+    <tbody>
+      <tr>
+        <td class="px-2">Matches: </td>
+        <td class="px-2">{{ player_stats.matchCount }}</td>
+      </tr>
+      <tr>
+        <td class="px-2">Wins: </td>
+        <td class="px-2">{{ player_stats.winCount }}</td>
+      </tr>
+      <tr>
+        <td class="px-2">------</td>
+        <td class="px-2">------</td>
+      </tr>
+      <tr>
+        <td class="px-2">Kills: </td>
+        <td class="px-2">{{ player_stats.kills }}</td>
+      </tr>
+      <tr>
+        <td class="px-2">Deaths: </td>
+        <td class="px-2">{{ player_stats.deaths }}</td>
+      </tr>
+      <tr>
+        <td class="px-2">K/D: </td>
+        <td class="px-2">{{ player_stats.kd }}</td>
+      </tr>
+      <tr>
+        <td class="px-2">Headshots: </td>
+        <td class="px-2">{{ player_stats.headshots }}</td>
+      </tr>
+      <tr>
+        <td class="px-2">ADR: </td>
+        <td class="px-2">{{ player_stats.adr }}</td>
+      </tr>
+      <tr>
+        <td class="px-2">enemiesFlashed: </td>
+        <td class="px-2">{{ player_stats.enemiesFlashed }}</td>
+      </tr>
+      <tr>
+        <td class="px-2">utilityDamage: </td>
+        <td class="px-2">{{ player_stats.utilityDamage }}</td>
+      </tr>
+    </tbody>
+  </table>
   
 </div>
 <div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">

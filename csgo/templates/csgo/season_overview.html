@@ -13,12 +13,12 @@
       <tr>
         <th class="px-2">{Position}</th>
         <th class="px-2">{Name}</th>
-        <th class="px-2">{Balance}</th>
+        <th class="px-2">{Elo}</th>
         <th class="px-2">{Rank}</th>
       </tr>
     </thead>
     <tbody>
-      {% for player in season_player_elos %}
+      {% for player in ranked_players %}
       {% if forloop.counter == 1 %}
       <tr class="text-yellow-300 text-shadow-aoc shadow-yellow-300">
       {% elif forloop.counter == 2 %}
@@ -29,7 +29,7 @@
       <tr>
       {% endif %}
         <td class="px-2">{{ forloop.counter }}</td>
-        <td class="px-2">{{ player.player.name }}</td>
+        <td class="px-2"><a href="{% url 'cs_player_profile' player_id=player.player.id %}"></a>{{ player.player.name }}</td>
         <td class="px-2">{{ player.elo }}</td>
         {% if forloop.first %}
         <td class="px-2">
@@ -67,7 +67,7 @@
       <tbody>
         {% for player in unranked_players %}
         <tr>
-          <td class="px-2">{{ player.player.name }}</td>
+          <td class="px-2"><a href="{% url 'cs_player_profile' player_id=player.player.id %}">{{ player.player.name }}</a></td>
         </tr>
         {% endfor %}
       </tbody>

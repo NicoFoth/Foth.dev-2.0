@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.db.models import Count
+from django.db.models import Count, Sum, Case, When
 from .models import *
 from .forms import SelectPlayers
 from .generate_team import generate
@@ -20,13 +20,17 @@ def cs_overview(request):
 
 def season_overview(request, season_id):
     season_object = CSSeason.objects.get(pk=season_id)
-    ranked_players = CSPlayerMatch.objects.filter(match__season=season_id).values('player').annotate(game_count=Count('player')).filter(game_count__gte=10).values_list('player', flat=True)
-    season_player_elos = CSPlayerSeasonElo.objects.filter(season=season_object, player__in=ranked_players).select_related().order_by("-elo")
-    unranked_players = CSPlayerMatch.objects.filter(match__season=season_id).exclude(player__in=ranked_players)
+    season_player_elos = CSPlayerSeasonElo.objects.filter(season=season_object).select_related().order_by("-elo")
+
+    ranked_match_counts = CSPlayerMatch.objects.filter(match__season=season_object).annotate(matchCount=Count('match')).filter(matchCount__gte=10)
+
+    ranked_players = CSPlayerSeasonElo.objects.filter(season=season_object, player__pk__in=ranked_match_counts.values_list("player", flat=True).distinct())
+
+    unranked_players = CSPlayerSeasonElo.objects.filter(season=season_object).exclude(player__pk__in=ranked_match_counts.values_list("player", flat=True).distinct())
 
     matches = CSMatch.objects.filter(season=season_id).order_by("-date")
 
-    return render(request, "csgo/season_overview.html", {"season": season_object, "season_player_elos": season_player_elos, "unranked_players": unranked_players, "matches": matches})
+    return render(request, "csgo/season_overview.html", {"season": season_object, "ranked_players": ranked_players, "unranked_players": unranked_players, "matches": matches})
 
 
 def match_overview(request, match_id):
@@ -41,7 +45,13 @@ def player_profile(request, player_id):
     player_matches = CSPlayerMatch.objects.filter(player=player_object).select_related().order_by("-match__date")
     season_elos = CSPlayerSeasonElo.objects.filter(player=player_object).select_related().order_by("-season__date")
 
-    return render(request, "csgo/player_profile.html", {"player": player_object, "player_matches": player_matches, "season_elos": season_elos})
+    player_stats = CSPlayerMatch.objects.filter(player=player_object).select_related().aggregate(
+        kills=Sum('kills'), deaths=Sum('deaths'), assist= Sum('assists'),
+        kd=Sum('kills')/Sum('deaths'), headshots=Sum('headshotKills'),
+        enemiesFlashed=Sum('enemiesFlashed'), utilityDamage=Sum('utilityDamage'),
+        matchCount=Count('match'), winCount=Count(Case(When(win=True, then=1))))
+
+    return render(request, "csgo/player_profile.html", {"player": player_object, "player_matches": player_matches, "season_elos": season_elos, "player_stats": player_stats})
 
 
 def select_players(request):

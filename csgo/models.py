@@ -62,6 +62,7 @@ class CSPlayerMatch(models.Model):
     deaths = models.IntegerField(default=0)
     assists = models.IntegerField(default=0)
     headshotKills = models.IntegerField(default=0)
+    adr = models.IntegerField(default=0)
     mvps = models.IntegerField(default=0)
     enemiesFlashed = models.IntegerField(default=0)
     utilityDamage = models.IntegerField(default=0)

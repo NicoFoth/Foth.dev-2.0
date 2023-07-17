@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1 class="text-3xl text-green-500">{{ match.map }}</h1>
-<p class="text-green-700">{{ map.date }}</p>
+<p class="text-green-700"><a href="{% url 'cs_season_overview' season_id=match.season.id %}">{{ match.season.name }}</a>: {{ match.date }}</p>
 <div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
   <h2 class="text-2xl text-green-700 text-center">Scoreboard</h2>
   <p class="text-center">Endscore: {{ match.endstate }}</p>
@@ -24,7 +24,7 @@
     {% for player in match_players %}
     {% if player.win == 1 %}
       <tr class="text-green-500">
-        <td class="px-2">{{ player.player.name }}</td>
+        <td class="px-2"><a href="{% url 'cs_player_profile' player_id=player.player.id %}">{{ player.player.name }}</a></td>
         <td class="px-2">{{ player.kills }}</td>
         <td class="px-2">{{ player.assists }}</td>
         <td class="px-2">{{ player.deaths }}</td>
@@ -46,7 +46,7 @@
     {% for player in match_players %}
     {% if player.win == 0 %}
     <tr>
-        <td class="px-2">{{ player.player.name }}</td>
+        <td class="px-2"><a href="{% url 'cs_player_profile' player_id=player.player.id %}">{{ player.player.name }}</a></td>
         <td class="px-2">{{ player.kills }}</td>
         <td class="px-2">{{ player.assists }}</td>
         <td class="px-2">{{ player.deaths }}</td>
