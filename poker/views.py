@@ -17,7 +17,6 @@ def show_poker_page(request):
                 balance += game.chips
             seasons[season].append((player, balance))
         seasons[season].sort(key=lambda x: x[1], reverse=True)
-        print(seasons)
 
 
     return render(request, "poker/show_poker_page.html", {"seasons_data": seasons})
