@@ -20,7 +20,6 @@ def cs_overview(request):
 
 def season_overview(request, season_id):
     season_object = CSSeason.objects.get(pk=season_id)
-    season_player_elos = CSPlayerSeasonElo.objects.filter(season=season_object).select_related().order_by("-elo")
 
     ranked_match_counts = CSPlayerMatch.objects.filter(match__season=season_object).annotate(matchCount=Count('match')).filter(matchCount__gte=10)
 
