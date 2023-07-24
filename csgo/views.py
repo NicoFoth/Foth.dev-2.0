@@ -49,8 +49,13 @@ def player_profile(request, player_id):
         kd=Sum('kills')/Sum('deaths'), headshots=Sum('headshotKills'),
         enemiesFlashed=Sum('enemiesFlashed'), utilityDamage=Sum('utilityDamage'),
         matchCount=Count('match'), winCount=Count(Case(When(win=True, then=1))))
+    
+    player_seasons = CSPlayerMatch.objects.filter(player=player_object).values("match__season").annotate(
+        kills=Sum('kills'), deaths=Sum('deaths'), assist= Sum('assists'),
+        headshots=Sum('headshotKills'), enemiesFlashed=Sum('enemiesFlashed'), utilityDamage=Sum('utilityDamage'),
+        matchCount=Count('match'), winCount=Count(Case(When(win=True, then=1)))).order_by("match__season__startDate")
 
-    return render(request, "csgo/player_profile.html", {"player": player_object, "player_matches": player_matches, "season_elos": season_elos, "player_stats": player_stats})
+    return render(request, "csgo/player_profile.html", {"player": player_object, "player_matches": player_matches, "season_elos": season_elos, "player_stats": player_stats, "player_seasons": player_seasons})
 
 
 def select_players(request):
