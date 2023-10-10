@@ -3,4 +3,3 @@ nohup.out
 *.pyo
 nohup.out
 .vscode/*
-db.sqlite3
