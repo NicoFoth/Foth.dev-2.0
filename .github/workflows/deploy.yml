@@ -17,7 +17,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/nicof/workspace/Foth.dev-2.0
+            cd /home/nicof/Foth.dev-2.0
 
             # Pull latest changes
             git pull origin master
