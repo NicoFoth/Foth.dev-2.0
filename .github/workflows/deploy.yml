@@ -1,10 +1,8 @@
 name: Deploy Django Application
-
 on:
   push:
     branches:
       - main
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,7 +20,16 @@ jobs:
             # Pull latest changes
             git pull origin main
 
+            # Create virtual environment if it doesn't exist
+            if [ ! -d "venv" ]; then
+                python3.13 -m venv venv
+            fi
+
+            # Activate virtual environment
+            source venv/bin/activate
+
             # Install/update dependencies
+            pip3.13 install --upgrade pip
             pip3.13 install -r requirements.txt
 
             # Check migrations first
@@ -30,7 +37,7 @@ jobs:
 
             # If check passes, run actual migrations
             if [ $? -eq 0 ]; then
-                python3.13 manage.py migrate
+                python manage.py migrate
             else
                 echo "Migration check failed! Please review migrations."
                 exit 1
@@ -38,6 +45,9 @@ jobs:
 
             # Collect static files
             python3.13 manage.py collectstatic --noinput
+
+            # Deactivate virtual environment
+            deactivate
 
             # Restart Gunicorn
             sudo systemctl restart gunicorn
