@@ -17,6 +17,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            whoami
             cd /home/nicof/workspace/Foth.dev-2.0
 
             # Pull latest changes
@@ -37,7 +38,7 @@ jobs:
             fi
 
             # Collect static files
-            python manage.py collectstatic --noinput
+            python3.13 manage.py collectstatic --noinput
 
             # Restart Gunicorn
             sudo systemctl restart gunicorn
