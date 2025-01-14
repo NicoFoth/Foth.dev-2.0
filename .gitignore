@@ -3,3 +3,5 @@ nohup.out
 *.pyo
 nohup.out
 .vscode/*
+logs/
+staticfiles/
