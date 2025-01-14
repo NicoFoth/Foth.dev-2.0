@@ -1,0 +1,46 @@
+name: Deploy Django Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy using SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/nicof/workspace/Foth.dev-2.0
+
+            # Pull latest changes
+            git pull origin master
+
+            # Install/update dependencies
+            pip3.13 install -r requirements.txt
+
+            # Check migrations first
+            python3.13 manage.py migrate --check
+
+            # If check passes, run actual migrations
+            if [ $? -eq 0 ]; then
+                python3.13 manage.py migrate
+            else
+                echo "Migration check failed! Please review migrations."
+                exit 1
+            fi
+
+            # Collect static files
+            python manage.py collectstatic --noinput
+
+            # Restart Gunicorn
+            sudo systemctl restart gunicorn
+
+            # Reload Nginx
+            sudo systemctl reload nginx
