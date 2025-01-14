@@ -131,11 +131,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static/"),
-    "/usr/local/lib/python3.8/dist-packages/django/contrib/admin/static",
+    os.path.join(BASE_DIR, "static"),
     )
 
-STATIC_ROOT = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 TAILWIND_APP_NAME = 'theme'
 
