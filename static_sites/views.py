@@ -19,7 +19,3 @@ class AdminLogin(LoginView):
 
 def show_example_pages(request):
     return render(request, 'static_sites/example_pages.html')
-
-
-def show_contact_page(request):
-    return render(request, 'static_sites/contact.html')

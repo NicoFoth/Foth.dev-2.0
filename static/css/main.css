@@ -1,0 +1,415 @@
+/* Base styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0F0F23;
+    font-family: monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #15803d; /* green-700 */
+}
+
+/* Layout */
+.page-content {
+    width: 100%;
+    margin: 0 20px;
+    flex: 1;
+}
+
+@media (min-width: 640px) {
+    .page-content {
+        width: 50%;
+        margin: 0 auto;
+    }
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 20px 0;
+}
+
+.nav-link {
+    text-decoration: none;
+}
+
+.nav-link:nth-child(1) { flex-basis: 25%; }
+.nav-link:nth-child(2) { flex-basis: 16.66%; }
+.nav-link:nth-child(3) { flex-basis: 16.66%; }
+.nav-link:nth-child(4) { flex-basis: 16.66%; }
+.nav-link:nth-child(5) { flex-basis: 16.66%; }
+.nav-link:nth-child(6) { flex-basis: 16.66%; }
+
+/* Typography */
+h1 {
+    color: #84cc16; /* lime-500 */
+    text-shadow: 0 0 10px #84cc16;
+    transition: all 0.2s ease;
+}
+
+h1:hover {
+    color: #ef4444; /* red-500 */
+    text-shadow: 0 0 10px #ef4444;
+}
+
+h3 {
+    color: #16a34a; /* green-600 */
+    transition: all 0.2s ease;
+}
+
+h3:hover {
+    color: #22c55e; /* green-500 */
+    text-shadow: 0 0 10px #22c55e;
+}
+
+/* ASCII Logo */
+.ascii-logo {
+    margin: 4rem 0;
+}
+
+.ascii-logo a {
+    color: #22c55e; /* green-500 */
+    text-decoration: none;
+}
+
+/* Text and Links */
+p {
+    margin: 0.75rem 0;
+}
+
+a {
+    color: #22c55e; /* green-500 */
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: #ef4444; /* red-500 */
+    text-shadow: 0 0 10px #ef4444;
+}
+
+.text-shadow-aoc {
+    text-shadow: 0 0 10px currentColor;
+}
+
+/* Project Cards */
+.project-grid {
+    display: grid;
+    gap: 1rem;
+    margin: 1.25rem auto;
+}
+
+@media (min-width: 1024px) {
+    .project-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.project-card {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    margin: 1.25rem 0;
+    border: 2px solid #15803d; /* green-700 */
+}
+
+.project-card .overflow-hidden {
+    overflow: hidden;
+}
+
+.project-card .content {
+    padding: 0.5rem 1.5rem;
+}
+
+.project-card .title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #facc15; /* yellow-400 */
+    text-shadow: 0 0 10px #eab308; /* yellow-500 */
+}
+
+.project-card .description {
+    color: #9ca3af; /* gray-400 */
+    overflow-y: auto;
+    max-height: 16rem;
+}
+
+.project-card .links {
+    position: absolute;
+    bottom: 0;
+    padding: 0.5rem 1.5rem;
+}
+
+.project-card .links a {
+    color: #16a34a; /* green-600 */
+    font-size: 0.875rem;
+    margin-right: 1rem;
+}
+
+.project-card .links a:hover {
+    color: #22c55e; /* green-500 */
+    text-shadow: 0 0 10px #22c55e;
+}
+
+/* CS Page Styles */
+.cs-rankings h1,
+.player-profile h1,
+.season-overview h1 {
+    font-size: 1.875rem;
+    color: #22c55e; /* green-500 */
+}
+
+.cs-rankings .season-container,
+.player-profile .stats-container,
+.season-overview .stats-container {
+    width: fit-content;
+    border: 2px solid #15803d; /* green-700 */
+    padding: 0.5rem;
+    margin: 1.25rem 0;
+    text-align: center;
+    overflow: auto;
+}
+
+.cs-rankings h2,
+.player-profile h2,
+.season-overview h2 {
+    font-size: 1.5rem;
+    color: #15803d; /* green-700 */
+    text-align: center;
+}
+
+.cs-rankings table,
+.player-profile table,
+.season-overview table {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.cs-rankings th,
+.player-profile th,
+.season-overview th {
+    padding: 0 0.5rem;
+}
+
+.cs-rankings td,
+.player-profile td,
+.season-overview td {
+    padding: 0 0.5rem;
+}
+
+.cs-rankings tbody tr:first-child,
+.season-overview tbody tr:first-child {
+    color: #fde047; /* yellow-300 */
+    text-shadow: 0 0 10px #fde047;
+}
+
+.cs-rankings tbody tr:first-child a,
+.season-overview tbody tr:first-child a {
+    color: #fde047; /* yellow-300 */
+    text-shadow: 0 0 10px #fde047;
+}
+
+.cs-rankings tbody tr:nth-child(2),
+.season-overview tbody tr:nth-child(2) {
+    color: #d4d4d8; /* zinc-300 */
+    text-shadow: 0 0 10px #d4d4d8;
+}
+
+.cs-rankings tbody tr:nth-child(2) a,
+.season-overview tbody tr:nth-child(2) a {
+    color: #d4d4d8; /* zinc-300 */
+    text-shadow: 0 0 10px #d4d4d8;
+}
+
+.cs-rankings tbody tr:nth-child(3),
+.season-overview tbody tr:nth-child(3) {
+    color: #a16207; /* yellow-700 */
+    text-shadow: 0 0 10px #a16207;
+}
+
+.cs-rankings tbody tr:nth-child(3) a,
+.season-overview tbody tr:nth-child(3) a {
+    color: #a16207; /* yellow-700 */
+    text-shadow: 0 0 10px #a16207;
+}
+
+.cs-rankings .rank-image,
+.season-overview .rank-image {
+    width: 6rem; /* 96px - equivalent to w-24 */
+    height: auto;
+}
+
+/* Match Overview Styles */
+.match-overview h1 {
+    font-size: 1.875rem;
+    color: #22c55e; /* green-500 */
+}
+
+.match-overview .match-info {
+    color: #15803d; /* green-700 */
+}
+
+.match-overview .scoreboard-container {
+    width: fit-content;
+    border: 2px solid #15803d; /* green-700 */
+    padding: 0.5rem;
+    margin: 1.25rem 0;
+    text-align: center;
+    overflow: auto;
+}
+
+.match-overview h2 {
+    font-size: 1.5rem;
+    color: #15803d; /* green-700 */
+    text-align: center;
+}
+
+.match-overview table {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.match-overview th {
+    padding: 0 0.5rem;
+}
+
+.match-overview td {
+    padding: 0 0.5rem;
+}
+
+.match-overview tr.winner {
+    color: #22c55e; /* green-500 */
+}
+
+.match-overview tr.separator td {
+    color: #9ca3af; /* gray-400 */
+}
+
+/* Player Profile Styles */
+.player-profile .stats-container {
+    margin: 1.25rem 0;
+}
+
+.player-profile .stats-container table {
+    margin: 1.25rem 0;
+}
+
+.player-profile .stats-container tr.separator td {
+    color: #9ca3af; /* gray-400 */
+}
+
+/* Season Overview Styles */
+.season-overview .stats-container {
+    margin: 1.25rem 0;
+}
+
+.season-overview .stats-container p {
+    text-align: center;
+}
+
+/* Select Players Styles */
+.select-players form {
+    text-align: center;
+    margin: 1.25rem 0;
+}
+
+.select-players input[type="submit"] {
+    background-color: #22c55e; /* green-500 */
+    color: #0F0F23;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-family: monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.select-players input[type="submit"]:hover {
+    background-color: #16a34a; /* green-600 */
+}
+
+/* Show Teams Styles */
+.show-teams table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    background-color: #4f5157;
+    color: #000;
+}
+
+.show-teams thead {
+    background-color: #9b9999;
+}
+
+.show-teams th {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.show-teams td {
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    color: #ddd6d6;
+    text-align: center;
+}
+
+/* Poker Page Styles */
+.poker-rankings h1 {
+    font-size: 1.875rem;
+    color: #22c55e; /* green-500 */
+}
+
+.poker-rankings .season-container {
+    width: fit-content;
+    border: 2px solid #15803d; /* green-700 */
+    padding: 0.5rem;
+    margin: 1.25rem 0;
+    text-align: center;
+    overflow: auto;
+}
+
+.poker-rankings h2 {
+    font-size: 1.5rem;
+    color: #15803d; /* green-700 */
+    text-align: center;
+}
+
+.poker-rankings table {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.poker-rankings th {
+    padding: 0 0.5rem;
+}
+
+.poker-rankings td {
+    padding: 0 0.5rem;
+}
+
+.poker-rankings tbody tr:first-of-type {
+    color: #fde047; /* yellow-300 - Gold */
+    text-shadow: 0 0 10px #fde047;
+}
+
+.poker-rankings tbody tr:nth-of-type(3) {
+    color: #d4d4d8; /* zinc-300 - Silver */
+    text-shadow: 0 0 10px #d4d4d8;
+}
+
+.poker-rankings tbody tr:nth-of-type(5) {
+    color: #a16207; /* yellow-700 - Bronze */
+    text-shadow: 0 0 10px #a16207;
+}
+
+.poker-rankings tr.separator td {
+    color: #9ca3af; /* gray-400 */
+}

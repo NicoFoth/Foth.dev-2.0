@@ -3,60 +3,62 @@
 
 
 {% block content %}
-<h1 class="text-3xl text-green-500">{{ match.map }}</h1>
-<p class="text-green-700"><a href="{% url 'cs_season_overview' season_id=match.season.id %}">{{ match.season.name }}</a>: {{ match.date }}</p>
-<div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
-  <h2 class="text-2xl text-green-700 text-center">Scoreboard</h2>
-  <p class="text-center">Endscore: {{ match.endstate }}</p>
-  <table class="text-center mx-auto">
-    <thead>
-      <tr>
-        <th class="px-2">{Name}</th>
-        <th class="px-2">{Kills}</th>
-        <th class="px-2">{Assists}</th>
-        <th class="px-2">{Deaths}</th>
-        <th class="px-2">{EF}</th>
-        <th class="px-2">{UD}</th>
-        <th class="px-2">{HS}</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for player in match_players %}
-    {% if player.win == 1 %}
-      <tr class="text-green-500">
-        <td class="px-2"><a href="{% url 'cs_player_profile' player_id=player.player.id %}">{{ player.player.name }}</a></td>
-        <td class="px-2">{{ player.kills }}</td>
-        <td class="px-2">{{ player.assists }}</td>
-        <td class="px-2">{{ player.deaths }}</td>
-        <td class="px-2">{{ player.enemiesFlashed }}</td>
-        <td class="px-2">{{ player.utilityDamage }}</td>
-        <td class="px-2">{{ player.headshotKills }}</td>
-      </tr>
-    {% endif %}
-    {% endfor %}
-    <tr>
-        <td>---</td>
-        <td>---</td>
-        <td>---</td>
-        <td>---</td>
-        <td>---</td>
-        <td>---</td>
-        <td>---</td>
-    </tr>
-    {% for player in match_players %}
-    {% if player.win == 0 %}
-    <tr>
-        <td class="px-2"><a href="{% url 'cs_player_profile' player_id=player.player.id %}">{{ player.player.name }}</a></td>
-        <td class="px-2">{{ player.kills }}</td>
-        <td class="px-2">{{ player.assists }}</td>
-        <td class="px-2">{{ player.deaths }}</td>
-        <td class="px-2">{{ player.enemiesFlashed }}</td>
-        <td class="px-2">{{ player.utilityDamage }}</td>
-        <td class="px-2">{{ player.headshotKills }}</td>
-      </tr>
-    {% endif %}
-    {% endfor %}
-    </tbody>
-  </table>
+<div class="match-overview">
+    <h1>{{ match.map }}</h1>
+    <p class="match-info"><a href="{% url 'cs_season_overview' season_id=match.season.id %}">{{ match.season.name }}</a>: {{ match.date }}</p>
+    <div class="scoreboard-container">
+        <h2>Scoreboard</h2>
+        <p>Endscore: {{ match.endstate }}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>{Name}</th>
+                    <th>{Kills}</th>
+                    <th>{Assists}</th>
+                    <th>{Deaths}</th>
+                    <th>{EF}</th>
+                    <th>{UD}</th>
+                    <th>{HS}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in match_players %}
+                {% if player.win == 1 %}
+                <tr class="winner">
+                    <td><a href="{% url 'cs_player_profile' player_id=player.player.id %}">{{ player.player.name }}</a></td>
+                    <td>{{ player.kills }}</td>
+                    <td>{{ player.assists }}</td>
+                    <td>{{ player.deaths }}</td>
+                    <td>{{ player.enemiesFlashed }}</td>
+                    <td>{{ player.utilityDamage }}</td>
+                    <td>{{ player.headshotKills }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                <tr class="separator">
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                {% for player in match_players %}
+                {% if player.win == 0 %}
+                <tr>
+                    <td><a href="{% url 'cs_player_profile' player_id=player.player.id %}">{{ player.player.name }}</a></td>
+                    <td>{{ player.kills }}</td>
+                    <td>{{ player.assists }}</td>
+                    <td>{{ player.deaths }}</td>
+                    <td>{{ player.enemiesFlashed }}</td>
+                    <td>{{ player.utilityDamage }}</td>
+                    <td>{{ player.headshotKills }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

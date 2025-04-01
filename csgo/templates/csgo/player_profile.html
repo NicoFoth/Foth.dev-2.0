@@ -1,119 +1,61 @@
-{% extends 'base.html' %}
-{% load static %}
-
+{% extends "base.html" %}
 
 {% block content %}
-<h1 class="text-3xl text-green-500">{{ player.name }}</h1>
-<div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
-  <h2 class="text-2xl text-green-700 text-center">Stats</h2>
-  <p class="text-center">Overall stats</p>
-  <table class="my-5">
-    <tbody>
-      <tr>
-        <td class="px-2">Matches: </td>
-        <td class="px-2">{{ player_stats.matchCount }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">Wins: </td>
-        <td class="px-2">{{ player_stats.winCount }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">------</td>
-        <td class="px-2">------</td>
-      </tr>
-      <tr>
-        <td class="px-2">Kills: </td>
-        <td class="px-2">{{ player_stats.kills }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">Deaths: </td>
-        <td class="px-2">{{ player_stats.deaths }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">K/D: </td>
-        <td class="px-2">{{ player_stats.kd }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">Headshots: </td>
-        <td class="px-2">{{ player_stats.headshots }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">ADR: </td>
-        <td class="px-2">{{ player_stats.adr }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">enemiesFlashed: </td>
-        <td class="px-2">{{ player_stats.enemiesFlashed }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">utilityDamage: </td>
-        <td class="px-2">{{ player_stats.utilityDamage }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div class="player-profile">
+    <h1>{{ player.name }}</h1>
+    <div class="stats-container">
+        <h2>Overall Stats</h2>
+        <table>
+            <tr>
+                <th>Matches</th>
+                <th>Wins</th>
+                <th>Kills</th>
+                <th>Deaths</th>
+                <th>Assists</th>
+                <th>K/D Ratio</th>
+                <th>Win Rate</th>
+            </tr>
+            <tr>
+                <td>{{ player_stats.matchCount }}</td>
+                <td>{{ player_stats.winCount }}</td>
+                <td>{{ player_stats.kills }}</td>
+                <td>{{ player_stats.deaths }}</td>
+                <td>{{ player_stats.assists }}</td>
+                <td>{{ player_stats.kd_ratio }}</td>
+                <td>{{ player_stats.win_rate }}%</td>
+            </tr>
+        </table>
 
-{% for season in player_seasons %}
-<div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
-  <h2 class="text-2xl text-green-700 text-center">{{ season.name }}</h2>
-  <p class="text-center">Overall stats</p>
-  <table class="my-5">
-    <tbody>
-      <tr>
-        <td class="px-2">Matches: </td>
-        <td class="px-2">{{ season.matchCount }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">Wins: </td>
-        <td class="px-2">{{ player_stats.winCount }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">------</td>
-        <td class="px-2">------</td>
-      </tr>
-      <tr>
-        <td class="px-2">Kills: </td>
-        <td class="px-2">{{ player_stats.kills }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">Deaths: </td>
-        <td class="px-2">{{ player_stats.deaths }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">K/D: </td>
-        <td class="px-2">{{ player_stats.kd }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">Headshots: </td>
-        <td class="px-2">{{ player_stats.headshots }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">ADR: </td>
-        <td class="px-2">{{ player_stats.adr }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">enemiesFlashed: </td>
-        <td class="px-2">{{ player_stats.enemiesFlashed }}</td>
-      </tr>
-      <tr>
-        <td class="px-2">utilityDamage: </td>
-        <td class="px-2">{{ player_stats.utilityDamage }}</td>
-      </tr>
-    </tbody>
-  </table>
+        <h2>Season Stats</h2>
+        <table>
+            <tr>
+                <th>Season</th>
+                <th>Matches</th>
+                <th>Wins</th>
+                <th>Kills</th>
+                <th>Deaths</th>
+                <th>Assists</th>
+                <th>K/D Ratio</th>
+                <th>Win Rate</th>
+            </tr>
+            {% for stat in player_seasons %}
+            <tr>
+                <td>{{ stat.match__season }}</td>
+                <td>{{ stat.matchCount }}</td>
+                <td>{{ stat.winCount }}</td>
+                <td>{{ stat.kills }}</td>
+                <td>{{ stat.deaths }}</td>
+                <td>{{ stat.assists }}</td>
+                <td>{{ stat.kd_ratio }}</td>
+                <td>{{ stat.win_rate }}%</td>
+            </tr>
+            {% if not forloop.last %}
+            <tr class="separator">
+                <td colspan="8"></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
 </div>
-{% endfor %}
-
-<div class="w-fit border-2 border-green-700 p-2 text-green-700 text-center my-5 overflow-auto">
-    <h2 class="text-2xl text-green-700 text-center">Matches</h2>
-    <table class="text-center mx-auto">
-      <tbody>
-        {% for match in player_matches %}
-        <tr>
-          <td class="px-2"><a href="{% url 'cs_match_overview' match_id=match.match.id %}">{{ match.match.date }} {{ match.match.map }}</a></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
 {% endblock %}

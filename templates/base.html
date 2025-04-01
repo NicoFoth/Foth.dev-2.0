@@ -1,4 +1,4 @@
-{% load static tailwind_tags %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,19 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     
     <title>Foth.dev</title>
 </head>
-<body class="bg-[#0F0F23]">
-    <div name="page-content" class="w-full sm:w-1/2 mx-5 font-mono">
-        <div name="navigation" class="items-end flex flex-row my-5">
-            <a class="basis-1/4" href="{% url 'show_landing_page' %}"><h1 class="text-lime-500 text-shadow-aoc shadow-lime-500  hover:text-red-500 hover:shadow-red-500">Foth.dev</h1></a>
-            <a class="basis-1/6" href="{% url 'show_about_page' %}"><h3 class="text-green-600  hover:text-green-500 hover:text-shadow-aoc hover:shadow-green-500">{About me}</h3></a>
-            <a class="basis-1/6" href="{% url 'show_projects' %}"><h3 class="text-green-600  hover:text-green-500 hover:text-shadow-aoc hover:shadow-green-500">{Projects}</h3></a>
-            <a class="basis-1/6" href="{% url 'show_contact_page' %}"><h3 class="text-green-600  hover:text-green-500 hover:text-shadow-aoc hover:shadow-green-500">{Contact}</h3></a>
-            <a class="basis-1/6" href="{% url 'show_poker_page' %}"><h3 class="text-green-600  hover:text-green-500 hover:text-shadow-aoc hover:shadow-green-500">{Poker}</h3></a>
-            <a class="basis-1/6" href="{% url 'cs_overview' %}"><h3 class="text-green-600  hover:text-green-500 hover:text-shadow-aoc hover:shadow-green-500">{CS}</h3></a>
+<body>
+    <div class="page-content">
+        <div class="navigation">
+            <a class="nav-link" href="{% url 'show_landing_page' %}"><h1>Foth.dev</h1></a>
+            <a class="nav-link" href="{% url 'show_about_page' %}"><h3>{About me}</h3></a>
+            <a class="nav-link" href="{% url 'show_projects' %}"><h3>{Projects}</h3></a>
+            <a class="nav-link" href="{% url 'show_poker_page' %}"><h3>{Poker}</h3></a>
+            <a class="nav-link" href="{% url 'cs_overview' %}"><h3>{CS}</h3></a>
         </div>
         {% block content %}
         {% endblock content %}

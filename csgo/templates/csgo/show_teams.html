@@ -1,28 +1,23 @@
-{% extends 'base_new.html' %}
+{% extends "base.html" %}
+
 {% block content %}
-
-<table class="table table-bordered" style="background-color: rgb(79, 81, 87); color: black;">
-    <thead style="background-color: rgb(155, 153, 153);">
-        <tr>
-            <th scope="col">Team A</th>
-            <th scope="col">Team B</th>
-        </tr>
-    </thead>
-    <tbody style="font-size: 19px; color: rgb(221, 214, 214)">
-        <tr>
-            <td>
-                {% for player in team_a %}
-                {{ player}}
-                {% endfor %}
-            </td>
-            <td>
-                {% for player in team_b %}
-                {{ player }}
-                {% endfor %}
-            </td>
-        </tr>
-
-    </tbody>
-</table>
-
-{% endblock content %}
+<div class="show-teams">
+    <h1>Team Assignment</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Team 1</th>
+                <th>Team 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player1, player2 in teams %}
+            <tr>
+                <td>{{ player1.name }}</td>
+                <td>{{ player2.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

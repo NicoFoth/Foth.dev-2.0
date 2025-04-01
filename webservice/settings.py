@@ -23,7 +23,7 @@ BASE_TEMPLATE = os.path.join(BASE_DIR, "templates")
 SECRET_KEY = os.getenv('DJANGO_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["foth.dev", "www.foth.dev", "localhost", "127.0.0.1", "162.55.221.197"]
 
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'static_sites.apps.StaticSitesConfig',
     'poker.apps.PokerConfig',
     'projects.apps.ProjectsConfig',
-    'tailwind',
     'theme',
     'django_browser_reload',
 ]
@@ -135,8 +134,6 @@ STATICFILES_DIRS = (
     )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-TAILWIND_APP_NAME = 'theme'
 
 LOGIN_REDIRECT_URL = "show_landing_page"
 
