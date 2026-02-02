@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["foth.dev", "www.foth.dev", "localhost", "127.0.0.1", "162.55.221.197"]
+ALLOWED_HOSTS = ["foth.dev", "www.foth.dev", "localhost", "127.0.0.1", "176.9.90.101"]
 
 INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
